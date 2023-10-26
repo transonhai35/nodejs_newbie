@@ -1,0 +1,40 @@
+<header>
+  {{> me-header}}
+</header>
+
+
+<div class="mt-4 container">
+    <div class="row">
+
+        {{#each cards}}
+        <div class="col-sm-6">
+            <div class="card invitation-card-item">
+                <a href="/cards/{{this._id}}">
+                    <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+                </a>
+                <div class="card-body">
+                    <a href="/cards/{{this._id}}">
+                        <h5 class="card-title">{{this.title}}</h5>
+                    </a>
+                    <p class="card-text">{{this.cardName}}</p>
+                    <a href="/cards/{{this._id}}" class="btn btn-primary">Sử dụng</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
+</div>
+
+<div id="welcomeMessage "></div>
+
+
+<script>
+
+
+  let logout = document.getElementById('logout');
+  logout.onclick = () => {
+    localStorage.removeItem('account');
+  }
+
+</script>

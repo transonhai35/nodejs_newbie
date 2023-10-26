@@ -1,0 +1,87 @@
+{{>header}}
+
+
+<div class="mt-4">
+    <div class="row">
+        <div class="col-3 col-md-4"></div>
+        <h3 class="col-12 col-md-8">Đăng ký</h3>
+        <div class="col-3 col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-4"></div>
+
+        <form id="formdata" class="col-6 col-md-4 form-signup" novalidate>
+            <div class="form-group">
+                <label for="full-name">Họ và tên</label>
+                <input type="text" class="form-control" id="full-name" name="fullName" required>
+                <div class="invalid-feedback">
+                    Bạn chưa nhập gì vào đây
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="user-name">Tên tài khoản</label>
+                <input type="text" class="form-control" id="user-name" name="userName" placeholder="Tên tài khoản" required>
+                <div class="invalid-feedback">
+                    Bạn chưa nhập gì vào đây
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required>
+                <div class="invalid-feedback">
+                    Bạn chưa nhập gì vào đây
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="repassword">Nhập lại mật khẩu</label>
+                <input type="password" class="form-control" id="repassword" name="repassword" placeholder="Nhập lại mật khẩu" required>
+                <div class="invalid-feedback">
+                    Mật khẩu nhập lại của bạn chưa đúng
+                </div>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+        </form>
+
+          <div class="col-6 col-md-4"></div>
+    </div>
+ 
+</div>
+
+
+
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  let username = 
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var form = document.getElementById('formdata');
+    // Loop over them and prevent submission
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        axios({
+            method: 'post',
+            url: '/account/store',
+            data: {
+                fullName: document.getElementById('full-name').value,
+                userName: document.getElementById('user-name').value,
+                password: document.getElementById('password').value,
+            }
+        }).then(res => {
+            window.location.href = "/account/stored";
+        }).catch(err => {
+            alert(err.response.data.msg);
+        });
+      }, false);
+
+  }, false);
+})();
+</script>
+

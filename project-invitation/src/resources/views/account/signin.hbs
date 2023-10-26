@@ -1,0 +1,67 @@
+{{>header}}
+
+<div class="mt-4">
+    <div class="row">
+        <div class="col-3 col-md-4"></div>
+        <h3 class="col-12 col-md-8">ĐĂNG NHẬP</h3>
+        <div class="col-3 col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-4"></div>
+
+        <form method="POST" id="formdata" class="col-6 col-md-4">
+        <div class="form-group">
+            <label for="user-name">Tên tài khoản</label>
+            <input type="text" class="form-control" id="user-name" name="user-name" placeholder="Mật khẩu">
+        </div>
+        <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        <p class="mt-2">
+          Bạn đã có tài khoản chưa?
+          <a href="/account/signup">Đăng ký tài khoản</a>
+        </p>
+        </form>
+
+          <div class="col-6 col-md-4"></div>
+    </div>   
+</div>
+
+
+
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  let username = 
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var form = document.getElementById('formdata');
+    // Loop over them and prevent submission
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        axios({
+            method: 'post',
+            url: '/account/login',
+            data: {
+                userName: document.getElementById('user-name').value,
+                password: document.getElementById('password').value,
+            }
+        }).then(
+            res => {
+                localStorage.setItem('account', JSON.stringify(res.data.msg));
+                window.location.href = "/me/my-home";
+        }).catch(err => {
+            alert(err.response.data.msg);
+        });
+      }, false);
+
+  }, false);
+})();
+</script>

@@ -1,0 +1,88 @@
+<header>
+  {{> me-header}}
+</header>
+
+
+<div class="mt-4 invitation__container">
+            <div class="invitation" style="background-image: url('{{card.image}}');">
+                <div class="space"></div>
+                <form class="invitation__cards" id="formdata">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control invitation__title hidden-border" id="title" name="title" value="Thiệp mời">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Trân trọng kính mời </label>
+                        <textarea type="text" class="form-control hidden-border invitation__name" id="name" name="name">{{card.name}}</textarea> 
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control invitation__description hidden-border" id="description" name="description">{{card.description}}</textarea>
+                    </div>
+
+                   <div class="form-group">
+                        <label for="time">Tập thể lớp</label>
+                        <textarea type="text" class="form-control invitation__time  hidden-border" id="grade" name="time">{{card.grade}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Niên khóa</label>
+                        <textarea type="text" class="form-control invitation__time  hidden-border" id="school-year" name="time">{{card.schoolYear}}</textarea>
+                     </div>
+                    <div class="form-group">
+                            <label for="time">Trường</label>
+                            <textarea type="text" class="form-control invitation__time  hidden-border" id="school-name" name="time">{{card.schoolName}}</textarea>
+                        </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label for="time">Thời gian</label>
+                            <textarea type="text" class="form-control invitation__time  hidden-border" id="time" name="time">{{card.time}}</textarea>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="location">Địa điểm</label>
+                            <textarea type="text" class="form-control invitation__location hidden-border" id="location" name="location">{{card.location}}</textarea>
+                        </div>
+                    </div>
+                    <p class="invitation__footer">Rất hân hạnh được đón tiếp</p>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  let account = JSON.parse(localStorage.getItem('account'));
+  let id = window.location.href.split('/').pop().split('?').toString();
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var form = document.getElementById('formdata');
+    // Loop over them and prevent submission
+
+      form.addEventListener('submit', function(event) {
+        axios({
+            method: 'post',
+            url: '/cards/:id',
+            data: {
+                params: id,
+                title: document.getElementById('title').value,
+                name: document.getElementById('name').value,
+                grade: document.getElementById('grade').value,
+                schoolYear: document.getElementById('school-year').value,
+                schoolName: document.getElementById('school-name').value,
+                time: document.getElementById('time').value,
+                location: document.getElementById('location').value,
+                author:  account.id,
+                image:'{{card.image}}',
+                role: '652138dc28e0d13170a35c23'
+            }
+        }).then(res => {
+            window.location.href = "/me/my-home";
+        }).catch(err => {
+            alert(err.response.data.msg);
+        });
+      }, false);
+  }, false);
+})();
+</script>

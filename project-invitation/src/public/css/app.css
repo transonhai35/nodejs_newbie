@@ -1,0 +1,41 @@
+.space {
+  height: 50px; }
+
+.background {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%; }
+
+.invitation-card-item {
+  margin-top: 12px; }
+
+.user-avatar {
+  width: 28px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 4px; }
+
+.invitation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 600px;
+  height: 900px; }
+  .invitation__title, .invitation__name, .invitation__description, .invitation__time, .invitation__location {
+    word-wrap: break-word;
+    border: none;
+    text-align: center;
+    outline: none;
+    background: transparent; }
+  .invitation__container {
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; }
+  .invitation__title {
+    font-weight: 700;
+    font-size: 30px; }

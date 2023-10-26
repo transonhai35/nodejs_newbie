@@ -1,0 +1,14 @@
+{{> header}}
+
+
+<content class="background" style="background-image: url('/img/main-bg.jpg');"></content>
+
+<script>
+    window.onload = function() {
+  // Retrieve user name
+  var name = localStorage.getItem('account');
+  if (name!== null){
+    window.location.href = "/me/my-home"
+  }
+}
+</script>
